@@ -60,10 +60,8 @@ class ProductItem extends StatelessWidget {
               // This might will not work, if it stay directly under Scaffold
               // widget. But instead, this will access the nearest scaffold
               // widget, it will be the Scaffold in screen page.
-              // ignore: deprecated_member_use
-              Scaffold.of(context).hideCurrentSnackBar();
-              // ignore: deprecated_member_use
-              Scaffold.of(context).showSnackBar(
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Text('Added item to cart!'),
                   duration: const Duration(seconds: 3),
