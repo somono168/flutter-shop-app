@@ -55,6 +55,26 @@ class ProductItem extends StatelessWidget {
             color: Theme.of(context).accentColor,
             onPressed: () {
               cart.addItem(product.id, product.title, product.price);
+
+              // We are not accessing Scaffold Widget, but its statis method
+              // This might will not work, if it stay directly under Scaffold
+              // widget. But instead, this will access the nearest scaffold
+              // widget, it will be the Scaffold in screen page.
+              // ignore: deprecated_member_use
+              Scaffold.of(context).hideCurrentSnackBar();
+              // ignore: deprecated_member_use
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Added item to cart!'),
+                  duration: const Duration(seconds: 3),
+                  action: SnackBarAction(
+                    label: 'UNDO',
+                    onPressed: () {
+                      cart.removeSingleItem(product.id);
+                    },
+                  ),
+                ),
+              );
             },
           ),
         ),
